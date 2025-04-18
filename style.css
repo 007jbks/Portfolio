@@ -70,21 +70,28 @@ body{
     margin-bottom: 30px;
 }
 
-.projects p {
-    margin: 15px 0;
+.projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
 }
 
-.projects a {
-    font-size: 22px;
+.project a {
+    font-size: 24px;
     color: #eee;
     text-decoration: none;
-    border-bottom: 2px solid transparent;
+    padding: 12px 24px;
+    border: 2px solid #00c853;
+    border-radius: 12px;
     transition: all 0.3s ease;
+    display: inline-block;
 }
 
-.projects a:hover {
-    color: #00c853;
-    border-bottom: 2px solid #00c853;
+.project a:hover {
+    background-color: #00c853;
+    color: #111;
+    transform: scale(1.05);
 }
 
 

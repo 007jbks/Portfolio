@@ -24,9 +24,11 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-
-    padding: 60px 20px;
+    width: 100%;
+    height: 100%;
+    padding: 60px 0px;
     color: #eee;
+    margin: 0px;
 }
 
 .intro-content {
@@ -40,8 +42,8 @@ body{
 }
 
 .profile-pic img {
-    width: 160px;
-    height: 160px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
     border: 4px solid #00c853;
     object-fit: cover;
@@ -326,19 +328,13 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 40px;
+    padding: 10px 20px;
     background-color: black;
     position: sticky;
     top: 0;
     z-index: 100;
+    
    
-}
-
-.nav-logo {
-    color: #00c853;
-    font-size: 28px;
-    font-weight: bold;
-    letter-spacing: 2px;
 }
 
 .nav-links {
@@ -347,7 +343,7 @@ body{
     gap: 30px;
 }
 
-.nav-links li a {
+.nav-links a {
     color: #eee;
     text-decoration: none;
     font-size: 18px;
@@ -356,7 +352,7 @@ body{
     transition: 0.3s;
 }
 
-.nav-links li a::after {
+.nav-links a::after {
     content: "";
     position: absolute;
     left: 0;

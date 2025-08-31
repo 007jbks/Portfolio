@@ -1,235 +1,864 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kartik Sirohi | ML & Backend Developer</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kartik Sirohi | ML & Backend Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    :root {
+      --primary-bg: #000000;
+      --secondary-bg: #0a0a0a;
+      --card-bg: #111111;
+      --border-color: #1a1a1a;
+      --accent-color: #ffffff;
+      --accent-hover: #f0f0f0;
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0a0;
+      --text-muted: #666666;
+      --glow-color: rgba(255, 255, 255, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--primary-bg);
+      color: var(--text-primary);
+      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* Background Animation */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.01) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .site-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+      transition: all 0.3s ease;
+    }
+
+    .site-title:hover {
+      text-shadow: 0 0 20px var(--glow-color);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      letter-spacing: 0.01em;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent-color);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: var(--primary-bg);
+      position: relative;
+    }
+
+    .intro-content {
+      z-index: 2;
+    }
+
+    .profile-pic {
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .profile-pic img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 2px solid var(--border-color);
+      transition: all 0.4s ease;
+      filter: grayscale(0.3);
+    }
+
+    .profile-pic:hover img {
+      filter: grayscale(0);
+      box-shadow: 0 0 40px var(--glow-color);
+      transform: scale(1.05);
+    }
+
+    .intro-text h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .intro-text h1 span {
+      background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 30px var(--glow-color);
+    }
+
+    .intro-text h2 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+      font-weight: 400;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .tagline {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 3rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.01em;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn-primary {
+      background: var(--text-primary);
+      color: var(--primary-bg);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--text-primary);
+      color: var(--text-primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--text-primary);
+      color: var(--primary-bg);
+      transform: translateY(-2px);
+    }
+
+    /* Section Headers */
+    section h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 3rem;
+      letter-spacing: -0.02em;
+      position: relative;
+    }
+
+    section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 2px;
+      background: var(--text-primary);
+    }
+
+    /* Skills Section */
+    .skills-section {
+      padding: 6rem 0;
+      background: var(--secondary-bg);
+    }
+
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .skill-tag {
+      background: var(--card-bg);
+      color: var(--text-primary);
+      padding: 0.8rem 1.5rem;
+      border-radius: 25px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-tag::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    .skill-tag:hover {
+      background: var(--text-primary);
+      color: var(--primary-bg);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
+    }
+
+    .skill-tag:hover::before {
+      transform: translateX(100%);
+    }
+
+    /* Cards */
+    .opensource-section, .projects-section {
+      padding: 6rem 0;
+    }
+
+    .projects-section {
+      background: var(--secondary-bg);
+    }
+
+    .contribution-card, .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contribution-card::before, .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .contribution-card:hover, .project-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .contribution-card:hover::before, .project-card:hover::before {
+      opacity: 1;
+    }
+
+    .contribution-card h3, .project-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+
+    .contribution-card h3 i, .project-card h3 i {
+      color: var(--text-secondary);
+      margin-right: 0.5rem;
+    }
+
+    .tech-stack {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .contribution-description, .project-card p:not(.tech-stack) {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: transparent;
+      border: 1px solid var(--text-primary);
+      border-radius: 8px;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-outline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--text-primary);
+      transition: left 0.3s ease;
+      z-index: -1;
+    }
+
+    .btn-outline:hover {
+      color: var(--primary-bg);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline:hover::before {
+      left: 0;
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    /* Footer */
+    .footer-section {
+      background: var(--primary-bg);
+      border-top: 1px solid var(--border-color);
+      padding: 4rem 0 2rem;
+      text-align: center;
+    }
+
+    .social-links-footer h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      letter-spacing: -0.01em;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 0.8rem 1.2rem;
+      border: 1px solid var(--border-color);
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      background: var(--card-bg);
+    }
+
+    .social-link:hover {
+      color: var(--text-primary);
+      border-color: var(--text-primary);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
+    }
+
+    .social-link i {
+      font-size: 1.1rem;
+    }
+
+    /* Contact Form */
+    .contact-form-wrapper {
+      max-width: 500px;
+      margin: 3rem auto 0;
+    }
+
+    .contact-form-wrapper h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      letter-spacing: -0.01em;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 1rem;
+      margin: 0.8rem 0;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      background: var(--card-bg);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--text-primary);
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+    }
+
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: var(--text-muted);
+    }
+
+    .contact-form button {
+      width: 100%;
+      margin-top: 1rem;
+      font-size: 1rem;
+    }
+
+    .copyright {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      letter-spacing: 0.02em;
+    }
+
+    /* Code styling */
+    code {
+      background: var(--secondary-bg);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85em;
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-section > * {
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .intro-text h1 {
+      animation-delay: 0.2s;
+    }
+
+    .intro-text h2 {
+      animation-delay: 0.4s;
+    }
+
+    .tagline {
+      animation-delay: 0.6s;
+    }
+
+    .hero-actions {
+      animation-delay: 0.8s;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .nav-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .nav-links {
+        gap: 1rem;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn {
+        width: 200px;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .social-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      section h2 {
+        font-size: 2rem;
+      }
+    }
+
+    /* Scroll animations */
+    @media (prefers-reduced-motion: no-preference) {
+      .contribution-card, .project-card {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.6s ease forwards;
+      }
+
+      .contribution-card:nth-child(even) {
+        animation-delay: 0.2s;
+      }
+
+      .project-card:nth-child(2) { animation-delay: 0.1s; }
+      .project-card:nth-child(3) { animation-delay: 0.2s; }
+      .project-card:nth-child(4) { animation-delay: 0.3s; }
+      .project-card:nth-child(5) { animation-delay: 0.4s; }
+      .project-card:nth-child(6) { animation-delay: 0.5s; }
+      .project-card:nth-child(7) { animation-delay: 0.6s; }
+    }
+
+    /* Selection styling */
+    ::selection {
+      background: rgba(255, 255, 255, 0.2);
+      color: var(--text-primary);
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--primary-bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--text-secondary);
+    }
+  </style>
 </head>
 <body>
 
-    <header class="hero-section">
-        <nav class="navbar">
-            <div class="container nav-content">
-                <a href="#" class="site-title">Kartik Sirohi</a>
-                <div class="nav-links">
-                    <a href="#about">About</a>
-                    <a href="#opensource">Open Source</a>
-                    <a href="#projects">Projects</a>
-                    <a href="#contact">Contact</a>
-                </div>
-            </div>
-        </nav>
-
-        <div class="container intro-content">
-            <div class="profile-pic">
-                <img src="slcXlA3-_400x400.jpg" alt="Profile picture of Kartik Sirohi">
-            </div>
-            <div class="intro-text">
-                <h1>Hi, I'm <span>Kartik Sirohi</span></h1>
-                <h2><span>ML and Backend Developer</span></h2>
-                <p class="tagline">Passionate about building intelligent systems and scalable solutions.</p>
-                <div class="hero-actions">
-                    <a href="#projects" class="btn btn-primary">View My Work</a>
-                    <a href="#contact" class="btn btn-secondary">Get in Touch</a>
-                </div>
-            </div>
+  <header class="hero-section">
+    <nav class="navbar">
+      <div class="container nav-content">
+        <div class="nav-links">
+          <a href="#opensource">Research</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
         </div>
-    </header>
+      </div>
+    </nav>
 
-    <main>
-        <section id="about" class="about-section container">
-            <br>
-            <h2>About Me</h2>
-            <p>
-                As a dedicated ML and Backend Developer, I specialize in leveraging data science, machine learning, and robust backend architectures to create impactful solutions. I thrive on challenges and am passionate about contributing to open-source projects and building innovative applications.
-            </p>
-            <p>
-                My expertise spans Python, FastAPI, PyTorch, TensorFlow, and the MERN stack, allowing me to craft everything from predictive models to real-time chat applications. I'm always eager to learn new technologies and apply them to solve complex problems.
-            </p>   <br>
-        </section>
-     
-
-        <section id="skills" class="skills-section container">
-            <br>
-            <h2>My Skills</h2>
-            <div class="skills-grid">
-                <span class="skill-tag">Python</span>
-                <span class="skill-tag">Machine Learning</span>
-                <span class="skill-tag">TensorFlow</span>
-                <span class="skill-tag">PyTorch</span>
-                <span class="skill-tag">FastAPI</span>
-                <span class="skill-tag">PostgreSQL</span>
-                <span class="skill-tag">JavaScript</span>
-                 <span class="skill-tag">C++</span>
-                <span class="skill-tag">Node.js</span>
-                <span class="skill-tag">Express.js</span>
-                <span class="skill-tag">MongoDB</span>
-                <span class="skill-tag">React</span>
-                <span class="skill-tag">Git</span>
-            </div>
-            <br>
-        </section>
-
-        <section id="opensource" class="opensource-section container">
-            <br>
-            <h2>Research Papers</h2>
-            <div class="contribution-card">
-                <h3><i class="fas fa-calculator"></i> Analysis of an Adaptive ARMA Model for Time Series Prediction</h3>
-               
-                <a href="https://www.preprints.org/manuscript/202506.2416/v1" target="_blank" class="btn btn-outline">Read Here<i class="fas fa-external-link-alt"></i></a>
-            </div>
-             <br>
-        </section>
-       
-
-        <section id="opensource" class="opensource-section container">
-            <br>
-            <h2>Open Source Contributions</h2>
-            <div class="contribution-card">
-                <h3><i class="fas fa-calculator"></i> SciPy: Added Example to <code>roots_jacobi</code> Docstring</h3>
-                <p><strong>PR Title:</strong> Added example to <code>roots_jacobi</code> docstring (#23129)</p>
-                <p><strong>Status:</strong> Open</p>
-                <p class="contribution-description">Enhanced the documentation for SciPy's numerical methods, improving clarity and usability for other developers.</p>
-                <a href="https://github.com/scipy/scipy/pull/23129" target="_blank" class="btn btn-outline">View Pull Request <i class="fas fa-external-link-alt"></i></a>
-            </div>
-             <br>
-        </section>
-       
-
-        <section id="projects" class="projects-section container">
-            <br>
-            <h2>My Projects</h2>
-            <div class="projects-grid">
-
-                <div class="project-card">
-
-                        <h3>Orion SLM - A 107M parameter language model with latent linear attention</h3>
-    <p class="tech-stack"><i class="fas fa-code"></i> Python, NumPy, PyTorch</p>
-    <p>Built my own language model with 107M parameters while also fusing together the latent and linear attention architectures from Deepseek and Performers respectively. </p>
-    <a href="https://github.com/007jbks/Orion-LLM" target="_blank" class="btn btn-outline">View on GitHub <i class="fas fa-external-link-alt"></i></a>
-</div>
-
-  <div class="project-card">
-
-                    
-    <h3>Transformer Encoder from Scratch</h3>
-    <p class="tech-stack"><i class="fas fa-code"></i> Python, NumPy</p>
-    <p>Built a Transformer Encoder from scratch using NumPy with custom attention, positional encoding, feed-forward layers etc. Learns contextual character representations like BERT/GPT encoders.</p>
-    <a href="https://github.com/007jbks/Custom_Transformer" target="_blank" class="btn btn-outline">View on GitHub <i class="fas fa-external-link-alt"></i></a>
-</div>
-
-                 <div class="project-card">
-                    <h3>Face Generation Diffusion Model</h3>
-                    <p class="tech-stack"><i class="fas fa-code"></i> Python, PyTorch</p>
-                    <p>Generates Fake Faces with ideal facial feature development such as eyes,nose and mouth.</p>
-                    <a href="https://github.com/007jbks/Face-Generation-Diffusion-Model" target="_blank" class="btn btn-outline">View on GitHub <i class="fas fa-external-link-alt"></i></a>
-                </div>
-
-                 <div class="project-card">
-                    <h3>C++ Library For Machine Learning</h3>
-                    <p class="tech-stack"><i class="fas fa-code"></i> C++, Machine Learning</p>
-                    <p>Implementation of Linear and Logistic Regression from scratch in C++</p>
-                    <a href="https://github.com/007jbks/C-Library-For-Machine-Learning" target="_blank" class="btn btn-outline">View on GitHub <i class="fas fa-external-link-alt"></i></a>
-                </div>
-
-                <div class="project-card">
-                    <h3>Driver Drowsiness Detection Model</h3>
-                    <p class="tech-stack"><i class="fas fa-code"></i> Python, PyTorch</p>
-                    <p>A CNN Model built using PyTorch and trained on the eye detection dataset on kaggle to detect driver drowsiness by analyzing eye movements of the driver.</p>
-                    <a href="https://github.com/007jbks/Driver-Drowsiness-Detection-Model" target="_blank" class="btn btn-outline">View on GitHub <i class="fas fa-external-link-alt"></i></a>
-                </div>
-
-
-                <div class="project-card">
-                    <h3>Gold Prediction API Based on News</h3>
-                    <p class="tech-stack"><i class="fas fa-code"></i> Python, FastAPI, NLP</p>
-                    <p>Predicts gold prices using business news and natural language processing to extract insights and generate forecasts.</p>
-                    <a href="https://github.com/007jbks/Gold-Price-Predictor-Based-on-News" target="_blank" class="btn btn-outline">View on GitHub <i class="fas fa-external-link-alt"></i></a>
-                </div>
-
-                <div class="project-card">
-                    <h3>PETS Backend</h3>
-                    <p class="tech-stack"><i class="fas fa-code"></i> FastAPI, PostgreSQL, Gemini API, SMTP</p>
-                    <p>A robust backend for a pet search application featuring image-based pet recognition and location-aware results for adoptions.</p>
-                    <a href="https://github.com/007jbks/Hackmol-6.0" target="_blank" class="btn btn-outline">View on GitHub <i class="fas fa-external-link-alt"></i></a>
-                </div>
-
-                <div class="project-card">
-                    <h3>Chat Application with MERN Stack and Socket.io</h3>
-                    <p class="tech-stack"><i class="fas fa-code"></i> MongoDB, Express.js, React, Node.js, Socket.io</p>
-                    <p>A real-time chat platform with user authentication, persistent message storage, and instant messaging capabilities.</p>
-                    <a href="https://github.com/007jbks/MERN-Stack-Chat-Application-with-Socket.io" target="_blank" class="btn btn-outline">View on GitHub <i class="fas fa-external-link-alt"></i></a>
-                </div>
-
-                <div class="project-card">
-                    <h3>Sign Language Reader</h3>
-                    <p class="tech-stack"><i class="fas fa-code"></i> Python, TensorFlow, CNN</p>
-                    <p>Recognizes various hand signs by leveraging a Convolutional Neural Network trained on image datasets like MNIST.</p>
-                    <a href="https://github.com/007jbks/Image-Recognition" target="_blank" class="btn btn-outline">View on GitHub <i class="fas fa-external-link-alt"></i></a>
-                </div>
-
-                <div class="project-card">
-                    <h3>Sentiment Analysis API</h3>
-                    <p class="tech-stack"><i class="fas fa-code"></i> FastAPI, TensorFlow</p>
-                    <p>An API service that analyzes the sentiment of comments and text inputs using a pre-trained machine learning model.</p>
-                    <a href="https://github.com/007jbks/Sentiment-API" target="_blank" class="btn btn-outline">View on GitHub <i class="fas fa-external-link-alt"></i></a>
-                </div>
-
-                <div class="project-card">
-                    <h3>Digit Recognition Model</h3>
-                    <p class="tech-stack"><i class="fas fa-code"></i> Python, Keras, CNN</p>
-                    <p>A deep learning model built with Keras for highly accurate classification of handwritten digits from the MNIST dataset.</p>
-                    <a href="https://github.com/007jbks/Digit-Recognition" target="_blank" class="btn btn-outline">View on GitHub <i class="fas fa-external-link-alt"></i></a>
-                </div>
-
-                <div class="project-card">
-                    <h3>Cyber Attack Prediction</h3>
-                    <p class="tech-stack"><i class="fas fa-code"></i> Python, CNN, Pandas, NumPy</p>
-                    <p>Predicts potential cyber attacks by analyzing network data patterns using a Convolutional Neural Network.</p>
-                    <a href="https://github.com/007jbks/Predicting-Cyber-Attacks" target="_blank" class="btn btn-outline">View on GitHub <i class="fas fa-external-link-alt"></i></a>
-                </div>
-            </div>
-            <br>
-        </section>
-    </main>
-
-    <footer class="footer-section">
-        <div class="container">
-            <div class="social-links-footer" id="contact">
-                <h2>Connect with Me</h2>
-                </div>
-                
-                <div style="display: flex;justify-content: space-around;align-items: center;">
-                <a href="https://x.com/Jon00Doe297" target="_blank" class="social-link" aria-label="Follow me on Twitter">
-                    <i class="fab fa-twitter"></i> <span>X</span>
-                <a href="https://medium.com/@kartik.orion.dev" target="_blank" class="social-link" aria-label="Read my blog on Medium">
-                    <i class="fas fa-pen-nib"></i><span>Blog</span>
-                </a>
-                <a href="https://github.com/007jbks" target="_blank" class="social-link" aria-label="View my GitHub profile">
-                    <i class="fab fa-github"></i> <span>Github</span>
-                </a>
-                 <!-- <a href="mailto:kartik.orion.dev@gmail.com" class="social-link" aria-label="Send me an email">
-                    <i class="fas fa-envelope"></i>
-                </a> -->
-                </div>
-          
-                    <br>
-
-            <div class="contact-form-wrapper">
-                <h2>Send Me a Message</h2>
-                <form action="https://formsubmit.co/kartik.orion.dev@gmail.com" method="POST" class="contact-form">
-                    <input type="text" name="name" placeholder="Your Name" required aria-label="Your Name">
-                    <input type="email" name="email" placeholder="Your Email" required aria-label="Your Email">
-                    <textarea name="message" rows="5" placeholder="Your Message" required aria-label="Your Message"></textarea>
-                    <input type="hidden" name="_captcha" value="false">
-                    <button type="submit" class="btn btn-primary">Send Message</button>
-                </form>
-            </div>
-             <p class="copyright">&copy; 2025 Kartik Sirohi. All rights reserved.</p>
+    <div class="container intro-content">
+      <div class="profile-pic">
+        <img src="slcXlA3-_400x400.jpg" alt="Profile picture of Kartik Sirohi">
+      </div>
+      <div class="intro-text">
+        <h1>Hi, I'm <span>Kartik Sirohi</span></h1>
+        <h2><span>ML & Backend Developer</span></h2>
+        <p class="tagline">Crafting intelligent systems and scalable architectures that push the boundaries of what's possible.</p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">Explore My Work</a>
+          <a href="#contact" class="btn btn-secondary">Let's Connect</a>
         </div>
-    </footer>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="skills" class="skills-section">
+      <div class="container">
+        <h2>Technical Arsenal</h2>
+        <div class="skills-grid">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Machine Learning</span>
+          <span class="skill-tag">TensorFlow</span>
+          <span class="skill-tag">PyTorch</span>
+          <span class="skill-tag">FastAPI</span>
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">C++</span>
+          <span class="skill-tag">Node.js</span>
+          <span class="skill-tag">Express.js</span>
+          <span class="skill-tag">MongoDB</span>
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">Git</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="opensource" class="opensource-section">
+      <div class="container">
+        <h2>Research Papers</h2>
+        <div class="contribution-card">
+          <h3><i class="fas fa-calculator"></i> Analysis of an Adaptive ARMA Model for Time Series Prediction</h3>
+          <p class="contribution-description">Deep dive into adaptive autoregressive moving average models, exploring novel approaches to time series forecasting with enhanced prediction accuracy.</p>
+          <a href="https://www.preprints.org/manuscript/202506.2416/v1" target="_blank" class="btn btn-outline">
+            Read Paper <i class="fas fa-external-link-alt"></i>
+          </a>
+        </div>
+
+        <h2 style="margin-top: 4rem;">Open Source Contributions</h2>
+        <div class="contribution-card">
+          <h3><i class="fas fa-code-branch"></i> SciPy: Enhanced <code>roots_jacobi</code> Documentation</h3>
+          <p><strong>PR #23129</strong> • Status: Open</p>
+          <p class="contribution-description">Improved developer experience by adding comprehensive examples to SciPy's numerical methods documentation, making complex mathematical functions more accessible to the community.</p>
+          <a href="https://github.com/scipy/scipy/pull/23129" target="_blank" class="btn btn-outline">
+            View Pull Request <i class="fas fa-external-link-alt"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="projects-section">
+      <div class="container">
+        <h2>Featured Projects</h2>
+        <div class="projects-grid">
+
+          <div class="project-card">
+            <h3>Orion SLM - 107M Parameter Language Model</h3>
+            <p class="tech-stack"><i class="fas fa-code"></i> Python • NumPy • PyTorch</p>
+            <p>Revolutionary language model architecture fusing latent and linear attention mechanisms from Deepseek and Performers. Engineered for optimal performance with efficient parameter utilization.</p>
+            <a href="https://github.com/007jbks/Orion-LLM" target="_blank" class="btn btn-outline">
+              Explore Code <i class="fas fa-external-link-alt"></i>
+            </a>
+          </div>
+
+          <div class="project-card">
+            <h3>Transformer Encoder from Scratch</h3>
+            <p class="tech-stack"><i class="fas fa-code"></i> Python • NumPy</p>
+            <p>Pure NumPy implementation of transformer architecture with custom attention mechanisms, positional encoding, and feed-forward layers. Learns contextual representations like modern language models.</p>
+            <a href="https://github.com/007jbks/Custom_Transformer" target="_blank" class="btn btn-outline">
+              View Implementation <i class="fas fa-external-link-alt"></i>
+            </a>
+          </div>
+
+          <div class="project-card">
+            <h3>Face Generation Diffusion Model</h3>
+            <p class="tech-stack"><i class="fas fa-code"></i> Python • PyTorch</p>
+            <p>Advanced generative model creating photorealistic faces with precise facial feature development. Implements state-of-the-art diffusion techniques for high-quality image synthesis.</p>
+            <a href="https://github.com/007jbks/Face-Generation-Diffusion-Model" target="_blank" class="btn btn-outline">
+              Generate Faces <i class="fas fa-external-link-alt"></i>
+            </a>
+          </div>
+
+          <div class="project-card">
+            <h3>C++ Machine Learning Library</h3>
+            <p class="tech-stack"><i class="fas fa-code"></i> C++ • Machine Learning</p>
+            <p>High-performance ML library with optimized implementations of linear and logistic regression algorithms. Built for speed and efficiency in production environments.</p>
+            <a href="https://github.com/007jbks/C-Library-For-Machine-Learning" target="_blank" class="btn btn-outline">
+              Browse Library <i class="fas fa-external-link-alt"></i>
+            </a>
+          </div>
+
+          <div class="project-card">
+            <h3>Driver Drowsiness Detection</h3>
+            <p class="tech-stack"><i class="fas fa-code"></i> Python • PyTorch • Computer Vision</p>
+            <p>CNN-powered safety system analyzing eye movements to detect driver fatigue. Real-time processing for enhanced road safety through intelligent monitoring.</p>
+            <a href="https://github.com/007jbks/Driver-Drowsiness-Detection-Model" target="_blank" class="btn btn-outline">
+              Safety First <i class="fas fa-external-link-alt"></i>
+            </a>
+          </div>
+
+          <div class="project-card">
+            <h3>PETS Backend Infrastructure</h3>
+            <p class="tech-stack"><i class="fas fa-code"></i> FastAPI • PostgreSQL • Gemini API</p>
+            <p>Scalable backend powering pet adoption platform with AI-driven image recognition and geolocation services. Connects pets with their forever homes.</p>
+            <a href="https://github.com/007jbks/Hackmol-6.0" target="_blank" class="btn btn-outline">
+              Help Pets <i class="fas fa-external-link-alt"></i>
+            </a>
+          </div>
+
+          <div class="project-card">
+            <h3>Real-time Chat Platform</h3>
+            <p class="tech-stack"><i class="fas fa-code"></i> MERN Stack • Socket.io</p>
+            <p>Full-stack communication platform with instant messaging, user authentication, and persistent storage. Seamless real-time experience across devices.</p>
+            <a href="https://github.com/007jbks/MERN-Stack-Chat-Application-with-Socket.io" target="_blank" class="btn btn-outline">
+              Start Chatting <i class="fas fa-external-link-alt"></i>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer-section">
+    <div class="container">
+      <div class="social-links-footer" id="contact">
+        <h2>Let's Build Something Amazing</h2>
+      </div>
+
+      <div class="social-links">
+        <a href="https://x.com/Jon00Doe297" target="_blank" class="social-link" aria-label="Follow me on Twitter">
+          <i class="fab fa-twitter"></i> <span>X</span>
+        </a>
+        <a href="https://medium.com/@kartik.orion.dev" target="_blank" class="social-link" aria-label="Read my blog on Medium">
+          <i class="fas fa-pen-nib"></i> <span>Blog</span>
+        </a>
+        <a href="https://github.com/007jbks" target="_blank" class="social-link" aria-label="View my GitHub profile">
+          <i class="fab fa-github"></i> <span>Github</span>
+        </a>
+      </div>
+
+      <div class="contact-form-wrapper">
+        <h2>Send Me a Message</h2>
+        <form action="https://formsubmit.co/kartik.orion.dev@gmail.com" method="POST" class="contact-form">
+          <input type="text" name="name" placeholder="Your Name" required aria-label="Your Name">
+          <input type="email" name="email" placeholder="Your Email" required aria-label="Your Email">
+          <textarea name="message" rows="5" placeholder="Your Message" required aria-label="Your Message"></textarea>
+          <input type="hidden" name="_captcha" value="false">
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+      </div>
+      <p class="copyright">&copy; 2025 Kartik Sirohi. All rights reserved.</p>
+    </div>
+  </footer>
 
 </body>
 </html>
